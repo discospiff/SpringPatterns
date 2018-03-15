@@ -13,13 +13,13 @@ public class Native implements PlantDecorator {
 	@Override
 	public String getTemplate() {
 		// TODO Auto-generated method stub
-		return null;
+		return "fragments/native";
 	}
 
 	@Override
 	public void processSubmission(Map<String, String> params) {
-		// TODO Auto-generated method stub
-
+		String region = params.get("region");
+		int i = 1 + 1;
 	}
 
 }

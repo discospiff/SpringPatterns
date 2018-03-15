@@ -13,12 +13,14 @@ public class Woody implements PlantDecorator {
 	@Override
 	public String getTemplate() {
 		// TODO Auto-generated method stub
-		return null;
+		return "fragments/woody";
 	}
 
 	@Override
 	public void processSubmission(Map<String, String> params) {
-		// TODO Auto-generated method stub
+		String height = params.get("height");
+		String fallColor = params.get("fallColor");
+		int i = 1 + 1;
 
 	}
 

@@ -6,6 +6,7 @@
 	<bean id="herbaceous" class="com.plantflashcards.ui.Herbaceous"/>
 	<bean id="nativeGeo" class="com.plantflashcards.ui.Native"/>
 	<bean id="woody" class="com.plantflashcards.ui.Woody"/>
+	<bean id="evergreen" class="com.bobsgreenhouse.Evergreen"/>
 	
 	<bean id="plantAttributeGroups" class="com.plantflashcards.ui.PlantAttributeGroups" scope="singleton">
 		<property name="decorators">
@@ -13,6 +14,7 @@
 				<entry key="Herbaceous Plant (Flower)" value-ref="herbaceous"/>
 				<entry key="Native" value-ref="nativeGeo"/>
 				<entry key="Woody Plant" value-ref="woody"/>
+				<entry key="Evergreen" value-ref="evergreen"/>
 			</map>
 		</property>
 	</bean>

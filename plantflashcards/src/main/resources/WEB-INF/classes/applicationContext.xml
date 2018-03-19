@@ -20,16 +20,10 @@
 	</bean>
 	
 	<bean id="broadleafPlantHelper" class="com.plantflashcards.helper.WoodyHelper" scope="prototype">
-		<property name="genus" value="Mahonia"/>
-		<property name="species" value="aquifolium"/>
-		<property name="common" value="Oregon Grapeholly"/>
 		<property name="evergreenHelper" ref="broadleafEvergreen"/>
 	</bean>
 	
 	<bean id="herbaceousPlantHelper" class="com.plantflashcards.helper.HerbaceousHelper" scope="prototype">
-		<property name="genus" value="Monarda"/>
-		<property name="species" value="didyma"/>
-		<property name="common" value="Beebalm"/>
 	</bean>
 	
 	<bean id="coniferousEvergreen" class="com.plantflashcards.helper.EvergreenHelper">

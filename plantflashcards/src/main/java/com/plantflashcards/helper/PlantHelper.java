@@ -1,38 +1,21 @@
 package com.plantflashcards.helper;
 
-public class PlantHelper {
+import org.json.simple.JSONObject;
 
-	private String genus;
-	private String species;
-	private String cultivar;
-	private String common;
+import com.plantflashcards.ui.Plant;
+
+public abstract class PlantHelper {
+
 	private String nativeRegion;
 	private EvergreenHelper evergreenHelper;
+	private Plant plant;
 	
-	public String getGenus() {
-		return genus;
+	public String visit(Plant plant) {
+		
+		this.plant = plant;
+		return generateJSON();
 	}
-	public void setGenus(String genus) {
-		this.genus = genus;
-	}
-	public String getSpecies() {
-		return species;
-	}
-	public void setSpecies(String species) {
-		this.species = species;
-	}
-	public String getCultivar() {
-		return cultivar;
-	}
-	public void setCultivar(String cultivar) {
-		this.cultivar = cultivar;
-	}
-	public String getCommon() {
-		return common;
-	}
-	public void setCommon(String common) {
-		this.common = common;
-	}
+	
 	public String getNativeRegion() {
 		return nativeRegion;
 	}
@@ -45,5 +28,26 @@ public class PlantHelper {
 	public void setEvergreenHelper(EvergreenHelper evergreenHelper) {
 		this.evergreenHelper = evergreenHelper;
 	}
+	
+	public String generateJSON() {
+		String returnValue = "";
+		
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("genus", plant.getGenus());
+		jsonObject.put("species", plant.getSpecies());
+		jsonObject.put("common", plant.getCommon());
+		jsonObject.put("cultivar", plant.getCultivar());
+		
+		// reach into our subclasses and ask them to generate any JSON they wish.
+		typeSpecificJSON(jsonObject);
+		
+		return jsonObject.toString();
+	}
+	
+	/**
+	 * A hook into our subclasses to see if they want to generate specific JSON.
+	 * @return
+	 */
+	public abstract void typeSpecificJSON(JSONObject jsonObject);
 	
 }

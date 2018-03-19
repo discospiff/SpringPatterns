@@ -1,5 +1,7 @@
 package com.plantflashcards.ui;
 
+import com.plantflashcards.helper.PlantHelper;
+
 /**
  * The data that represents a plant.
  * @author ucint
@@ -10,6 +12,10 @@ public class Plant {
 	private String species;
 	private String cultivar;
 	private String common;
+	
+	public String accept(PlantHelper plantHelper) {
+		return plantHelper.visit(this);
+	}
 	
 	public String getGenus() {
 		return genus;

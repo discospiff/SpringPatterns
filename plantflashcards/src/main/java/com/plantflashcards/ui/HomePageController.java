@@ -27,8 +27,12 @@ public class HomePageController {
 	// The decorators that apply for our plants.
 	private List<PlantDecorator> plantDecorators;
 	
+	// All of the saved plants.
+	private List<Plant> allPlants;
+	
 	public HomePageController() {
 		plantDecorators = new ArrayList<PlantDecorator>();
+		allPlants = new ArrayList<Plant>();
 	}
 
 	@RequestMapping("/home")
@@ -76,23 +80,26 @@ public class HomePageController {
 		for (PlantDecorator plantDecorator : plantDecorators) {
 			plantDecorator.processSubmission(requestParams);
 		}
+		// add the plant submitted to our collection of saved plants.
+		allPlants.add(plant);
 		return "saveplant";
 	}
 	
 	@RequestMapping(value="/generateJSON", method=RequestMethod.GET, produces="application/json")
-	public @ResponseBody List<PlantHelper> generateJSON() {
-		List<PlantHelper> plantHelpers = new ArrayList<PlantHelper>();
+	public @ResponseBody String generateJSON() {
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("/WEB-INF/classes/applicationContext.xml");
-		PlantHelper mahoniaAquifoliumHelper = context.getBean("broadleafPlantHelper", PlantHelper.class);
-		plantHelpers.add(mahoniaAquifoliumHelper);
-		PlantHelper monardaDidymaHelper = context.getBean("herbaceousPlantHelper", PlantHelper.class);
-		plantHelpers.add(monardaDidymaHelper);
-		// use the prototype pattern to create another Monarda
-		PlantHelper monardaFistulosaHelper = context.getBean("herbaceousPlantHelper", PlantHelper.class);
-		monardaFistulosaHelper.setSpecies("fistulosa");
-		monardaFistulosaHelper.setCommon("Wild Bergamot");
-		plantHelpers.add(monardaFistulosaHelper);
-		return plantHelpers;
+		PlantHelper plantHelper = context.getBean("broadleafPlantHelper", PlantHelper.class);
+			
+		// StringBuilder to contain our JSON.
+		StringBuilder json = new StringBuilder();
+		
+		// iterate over our collection of plants, and invoke the visitor.
+		for (Plant plant : allPlants) {
+			String plantJSON = plant.accept(plantHelper);
+			json.append(plantJSON);
+		}
+		
+		return json.toString();
 	}
 	
 }

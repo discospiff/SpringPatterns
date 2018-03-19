@@ -11,7 +11,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.plantflashcards.helper.PlantHelper;
 
@@ -77,17 +79,20 @@ public class HomePageController {
 		return "saveplant";
 	}
 	
-	@RequestMapping("/generateJSON")
-	public String generateJSON() {
+	@RequestMapping(value="/generateJSON", method=RequestMethod.GET, produces="application/json")
+	public @ResponseBody List<PlantHelper> generateJSON() {
+		List<PlantHelper> plantHelpers = new ArrayList<PlantHelper>();
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("/WEB-INF/classes/applicationContext.xml");
 		PlantHelper mahoniaAquifoliumHelper = context.getBean("broadleafPlantHelper", PlantHelper.class);
+		plantHelpers.add(mahoniaAquifoliumHelper);
 		PlantHelper monardaDidymaHelper = context.getBean("herbaceousPlantHelper", PlantHelper.class);
+		plantHelpers.add(monardaDidymaHelper);
 		// use the prototype pattern to create another Monarda
 		PlantHelper monardaFistulosaHelper = context.getBean("herbaceousPlantHelper", PlantHelper.class);
 		monardaFistulosaHelper.setSpecies("fistulosa");
 		monardaFistulosaHelper.setCommon("Wild Bergamot");
-		
-		return "home";
+		plantHelpers.add(monardaFistulosaHelper);
+		return plantHelpers;
 	}
 	
 }

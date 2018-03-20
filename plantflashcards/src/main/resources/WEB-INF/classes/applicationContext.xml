@@ -7,7 +7,8 @@
 	<bean id="nativeGeo" class="com.plantflashcards.ui.Native"/>
 	<bean id="woody" class="com.plantflashcards.ui.Woody"/>
 	<bean id="evergreen" class="com.bobsgreenhouse.Evergreen"/>
-	
+	<bean id="vine" class="com.plantflashcards.ui.Vine"/>
+		
 	<bean id="plantAttributeGroups" class="com.plantflashcards.ui.PlantAttributeGroups" scope="singleton">
 		<property name="decorators">
 			<map>
@@ -15,6 +16,7 @@
 				<entry key="Native" value-ref="nativeGeo"/>
 				<entry key="Woody Plant" value-ref="woody"/>
 				<entry key="Evergreen" value-ref="evergreen"/>
+				<entry key="Vine" value-ref="vine"/>
 			</map>
 		</property>
 	</bean>
@@ -22,6 +24,8 @@
 	
 	<bean id="woodyPlantHelper" class="com.plantflashcards.helper.WoodyHelper" scope="prototype">
 	</bean>
+	
+	<bean id="vineHelper" class="com.plantflashcards.helper.VineHelper" scope="prototype"/>
 	
 	<bean id="broadleafPlantHelper" class="com.plantflashcards.helper.WoodyHelper" scope="prototype">
 		<property name="evergreenHelper" ref="broadleafEvergreen"/>
@@ -37,5 +41,6 @@
 	<bean id="broadleafEvergreen" class="com.plantflashcards.helper.EvergreenHelper">
 		<property name="leafType" value="broadleaf"/>
 	</bean>
+	
 
 </beans>

@@ -43,6 +43,7 @@ public class HomePageController {
 	
 	@RequestMapping("/selectattributes")
 	public String selectAttributes(Model model) {
+		plantDecorators = new ArrayList<PlantDecorator>();
 		// pass all possible decorators to our form.
 		model.addAttribute("components", plantAttributeGroups.getDecorators().keySet());
 		return "selectattributes";

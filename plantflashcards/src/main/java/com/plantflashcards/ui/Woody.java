@@ -17,10 +17,13 @@ public class Woody implements PlantDecorator {
 	}
 
 	@Override
-	public void processSubmission(Map<String, String> params) {
+	public void processSubmission(Map<String, String> params, Plant plant) {
+		Map<String, String> additionalProperties = plant.getAdditionalProperties();
 		String height = params.get("height");
+		additionalProperties.put("height", height);
 		String fallColor = params.get("fallColor");
-		int i = 1 + 1;
+		additionalProperties.put("fallColor", fallColor);
+		additionalProperties.put(Plant.HELPER, "woodyPlantHelper");
 
 	}
 

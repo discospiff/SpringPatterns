@@ -17,8 +17,9 @@ public class Herbaceous implements PlantDecorator {
 	}
 
 	@Override
-	public void processSubmission(Map<String, String> params) {
-		// TODO Auto-generated method stub
+	public void processSubmission(Map<String, String> params, Plant plant) {
+		Map<String, String> additionalProperties = plant.getAdditionalProperties();
+		additionalProperties.put(Plant.HELPER, "herbaceousPlantHelper");
 
 	}
 

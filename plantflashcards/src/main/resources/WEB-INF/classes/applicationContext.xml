@@ -18,6 +18,10 @@
 			</map>
 		</property>
 	</bean>
+	<bean id="plantHelper" class="com.plantflashcards.helper.BasicPlantHelper" scope="prototype"/>
+	
+	<bean id="woodyPlantHelper" class="com.plantflashcards.helper.WoodyHelper" scope="prototype">
+	</bean>
 	
 	<bean id="broadleafPlantHelper" class="com.plantflashcards.helper.WoodyHelper" scope="prototype">
 		<property name="evergreenHelper" ref="broadleafEvergreen"/>

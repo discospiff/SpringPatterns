@@ -17,9 +17,10 @@ public class Native implements PlantDecorator {
 	}
 
 	@Override
-	public void processSubmission(Map<String, String> params) {
+	public void processSubmission(Map<String, String> params, Plant plant) {
 		String region = params.get("region");
-		int i = 1 + 1;
+		Map<String, String> additionalProperties = plant.getAdditionalProperties();
+		additionalProperties.put("nativeRegion", region);
 	}
 
 }

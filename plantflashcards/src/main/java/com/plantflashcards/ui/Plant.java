@@ -1,5 +1,8 @@
 package com.plantflashcards.ui;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.plantflashcards.helper.PlantHelper;
 
 /**
@@ -8,10 +11,18 @@ import com.plantflashcards.helper.PlantHelper;
  *
  */
 public class Plant {
+	public static final String HELPER = "HELPER";
 	private String genus;
 	private String species;
 	private String cultivar;
 	private String common;
+	
+	private Map<String, String> additionalProperties;
+	
+	public Plant() {
+		setAdditionalProperties(new HashMap<String,String>());
+		additionalProperties.put(HELPER, "plantHelper");
+	}
 	
 	public String accept(PlantHelper plantHelper) {
 		return plantHelper.visit(this);
@@ -40,5 +51,13 @@ public class Plant {
 	}
 	public void setCommon(String common) {
 		this.common = common;
+	}
+
+	public Map<String, String> getAdditionalProperties() {
+		return additionalProperties;
+	}
+
+	public void setAdditionalProperties(Map<String, String> additionalProperties) {
+		this.additionalProperties = additionalProperties;
 	}
 }

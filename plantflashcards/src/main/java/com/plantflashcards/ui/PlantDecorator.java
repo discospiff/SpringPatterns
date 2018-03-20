@@ -25,6 +25,6 @@ public interface PlantDecorator {
 	 * How to handle request parameter (name value pairs) of the submitted form
 	 * @param params request parameters
 	 */
-	void processSubmission(Map<String,String> params);
+	void processSubmission(Map<String,String> params, Plant plant);
 
 }

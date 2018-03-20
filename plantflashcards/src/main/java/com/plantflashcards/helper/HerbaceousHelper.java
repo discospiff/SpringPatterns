@@ -1,27 +1,15 @@
 package com.plantflashcards.helper;
 
+import java.util.Map;
+
 import org.json.simple.JSONObject;
 
 public class HerbaceousHelper extends PlantHelper {
-	private String flowerColor;
-	private String flowerTime;
-	
-	public String getFlowerColor() {
-		return flowerColor;
-	}
-	public void setFlowerColor(String flowerColor) {
-		this.flowerColor = flowerColor;
-	}
-	public String getFlowerTime() {
-		return flowerTime;
-	}
-	public void setFlowerTime(String flowerTime) {
-		this.flowerTime = flowerTime;
-	}
 	@Override
 	public void typeSpecificJSON(JSONObject jsonObject) {
-		jsonObject.put("flowerColor", flowerColor);
-		jsonObject.put("flowerTime", flowerTime);
+		Map<String, String> additionalProperties = plant.getAdditionalProperties();
+		jsonObject.put("flowerColor", additionalProperties.get("flowerColor"));
+		jsonObject.put("flowerTime", additionalProperties.get("flowerTime"));
 		
 	}
 }

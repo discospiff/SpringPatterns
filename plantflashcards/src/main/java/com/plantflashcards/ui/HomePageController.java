@@ -78,7 +78,7 @@ public class HomePageController {
 		// implement the command pattern to process our decorators.
 		// iterate over our Decorators, and invoke the command method
 		for (PlantDecorator plantDecorator : plantDecorators) {
-			plantDecorator.processSubmission(requestParams);
+			plantDecorator.processSubmission(requestParams, plant);
 		}
 		// add the plant submitted to our collection of saved plants.
 		allPlants.add(plant);
@@ -88,13 +88,15 @@ public class HomePageController {
 	@RequestMapping(value="/generateJSON", method=RequestMethod.GET, produces="application/json")
 	public @ResponseBody String generateJSON() {
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("/WEB-INF/classes/applicationContext.xml");
-		PlantHelper plantHelper = context.getBean("broadleafPlantHelper", PlantHelper.class);
 			
 		// StringBuilder to contain our JSON.
 		StringBuilder json = new StringBuilder();
 		
 		// iterate over our collection of plants, and invoke the visitor.
 		for (Plant plant : allPlants) {
+			Map<String, String> additionalProperties = plant.getAdditionalProperties();
+			String helperBean = additionalProperties.get(Plant.HELPER);
+			PlantHelper plantHelper = context.getBean(helperBean, PlantHelper.class);
 			String plantJSON = plant.accept(plantHelper);
 			json.append(plantJSON);
 		}
